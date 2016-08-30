@@ -2,17 +2,21 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using System.Collections.Generic;
+
 namespace IsoMmoRL
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class GameManager : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        private Texture2D tileSheet;
+
+        public GameManager()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -26,8 +30,15 @@ namespace IsoMmoRL
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
 
+            var width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2 - graphics.PreferredBackBufferWidth / 2;
+            var height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2 - graphics.PreferredBackBufferHeight / 2;
+            this.Window.Position = new Point(width, height);
+            
+            
             base.Initialize();
         }
 
@@ -37,10 +48,9 @@ namespace IsoMmoRL
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            tileSheet = Content.Load<Texture2D>("Images/isoPrototypeTiles");
+            TileManager.Init(tileSheet);
         }
 
         /// <summary>
@@ -49,7 +59,7 @@ namespace IsoMmoRL
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>
@@ -61,9 +71,6 @@ namespace IsoMmoRL
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -75,7 +82,22 @@ namespace IsoMmoRL
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+
+            spriteBatch.Begin();
+
+            int posX = 0;
+            int posY = 0;
+            int tileSize = 64;
+
+            foreach (KeyValuePair<Vector2, TextureRegion2D> kvp in TileManager.tiles)
+            {
+                var sourceRectangle = kvp.Value.Bounds;
+                spriteBatch.Draw(kvp.Value.Texture, new Rectangle(posX, posY, tileSize, tileSize), sourceRectangle, Color.White);
+                posX += 64;
+
+            }
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

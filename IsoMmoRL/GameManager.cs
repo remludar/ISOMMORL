@@ -85,16 +85,26 @@ namespace IsoMmoRL
 
             spriteBatch.Begin();
 
-            int posX = 0;
-            int posY = 0;
-            int tileSize = 64;
+            int tileWidth = 64;
+            int tileHeight = 64;
+            int mapWidth = 15 * tileWidth;
+            int mapHeight = 15 * tileHeight;
+            int startingPosX = graphics.PreferredBackBufferWidth / 2 - mapWidth / 16;
+            int startingPosY = graphics.PreferredBackBufferHeight / 2 - mapHeight / 8;
+            
 
-            foreach (KeyValuePair<Vector2, TextureRegion2D> kvp in TileManager.tiles)
+            //Draw a basic flat grass level
+            for (int x = 0; x < 10; x++)
             {
-                var sourceRectangle = kvp.Value.Bounds;
-                spriteBatch.Draw(kvp.Value.Texture, new Rectangle(posX, posY, tileSize, tileSize), sourceRectangle, Color.White);
-                posX += 64;
+                for (int y = 0; y < 10; y++)
+                {
+                    var texture = TileManager.tiles[new Vector2(0, 0)];
+                    var sourceRectangle = texture.Bounds;
+                    int posX = x * (tileWidth / 2) - y * (tileHeight / 2);
+                    int posY =  y * (tileHeight / 4) + x * (tileWidth / 4);
 
+                    spriteBatch.Draw(texture.Texture, new Rectangle(startingPosX + posX, startingPosY + posY, 64, 64), sourceRectangle, Color.White);
+                }
             }
 
             spriteBatch.End();

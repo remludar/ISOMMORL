@@ -49,7 +49,8 @@ namespace IsoMmoRL
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            tileSheet = Content.Load<Texture2D>("Images/isoPrototypeTiles");
+            //tileSheet = Content.Load<Texture2D>("Images/isoPrototypeTiles");
+            tileSheet = Content.Load<Texture2D>("Images/MyIsoTiles");
             TileManager.Init(tileSheet);
         }
 
@@ -85,27 +86,29 @@ namespace IsoMmoRL
 
             spriteBatch.Begin();
 
-            int tileWidth = 64;
-            int tileHeight = 64;
-            int mapWidth = 15 * tileWidth;
-            int mapHeight = 15 * tileHeight;
-            int startingPosX = graphics.PreferredBackBufferWidth / 2 - mapWidth / 16;
-            int startingPosY = graphics.PreferredBackBufferHeight / 2 - mapHeight / 8;
-            
+            int textureWidth = 64;
+            int textureHeight = 64;
+            int mapWidth = 15;
+            int mapHeight = 15;
+            int startingPosX = (graphics.PreferredBackBufferWidth / textureWidth / 2) * textureWidth - (textureWidth / 2);
+            int startingPosY = (graphics.PreferredBackBufferHeight / textureHeight / 2) * textureHeight - (mapHeight * textureWidth / 4) - (textureHeight / 2);
+
 
             //Draw a basic flat grass level
-            for (int x = 0; x < 10; x++)
+            for (int x = 0; x < mapWidth; x++)
             {
-                for (int y = 0; y < 10; y++)
+                for (int y = 0; y < mapHeight; y++)
                 {
-                    var texture = TileManager.tiles[new Vector2(0, 0)];
+                    var texture = TileManager.tiles[new Vector2(0, 2)];
                     var sourceRectangle = texture.Bounds;
-                    int posX = x * (tileWidth / 2) - y * (tileHeight / 2);
-                    int posY =  y * (tileHeight / 4) + x * (tileWidth / 4);
-
-                    spriteBatch.Draw(texture.Texture, new Rectangle(startingPosX + posX, startingPosY + posY, 64, 64), sourceRectangle, Color.White);
+                    int posX = x * (textureWidth / 2) - y * (textureHeight / 2);
+                    int posY = y * (textureHeight / 4) + x * (textureWidth / 4);
+                    spriteBatch.Draw(texture.Texture, new Rectangle(startingPosX + posX, startingPosY + posY, TileManager.tileSizeWidth, TileManager.tileSizeHeight), sourceRectangle, Color.White);
                 }
             }
+
+
+
 
             spriteBatch.End();
 

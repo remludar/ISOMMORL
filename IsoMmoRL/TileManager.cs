@@ -12,23 +12,26 @@ namespace IsoMmoRL
     public static class TileManager
     {
         public static Dictionary<Vector2, TextureRegion2D> tiles = new Dictionary<Vector2, TextureRegion2D>();
+        public static int tileSizeWidth, tileSizeHeight;
 
         public static void Init(Texture2D tileSheet)
         {
-            int tileSize = 64;
-            int width = tileSheet.Width / tileSize;
-            int height = 1;// tileSheet.Height / tileSize;
-            
+            tileSizeWidth = 64;
+            tileSizeHeight = 128;
+            int width = tileSheet.Width / tileSizeWidth;
+            int height = tileSheet.Height / tileSizeHeight;
+
 
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    var textureRegion = new TextureRegion2D("test", tileSheet, x * tileSize, y * tileSize, tileSize, tileSize);
+                    var textureRegion = new TextureRegion2D("test", tileSheet, x * tileSizeWidth, y * tileSizeHeight, tileSizeWidth, tileSizeHeight);
 
                     tiles.Add(new Vector2(x, y), textureRegion);
                 }
             }
+
 
         }
     }

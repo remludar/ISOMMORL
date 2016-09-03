@@ -46,6 +46,7 @@ namespace IsoMmoRL
             camera.ViewportHeight = graphics.GraphicsDevice.Viewport.Height;
 
             map = new Map(@"C:\Users\jewton\Dropbox\Personal\GameDev\MonoGame\Projects\Isometric MMO with Roguelike Quests\IsoMmoRL\IsoMmoRL\Map.txt");
+                          
 
             base.Initialize();
         }
@@ -57,7 +58,7 @@ namespace IsoMmoRL
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            tileSheet = Content.Load<Texture2D>("Images/BetterTiles");
+            tileSheet = Content.Load<Texture2D>("Images/basic_ground_tiles");
             TileManager.Init(tileSheet);
         }
 
@@ -95,8 +96,8 @@ namespace IsoMmoRL
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.TranslationMatrix);
 
-            int textureWidth = 64;
-            int textureHeight = 64;
+            int textureWidth = 128;
+            int textureHeight = 128;
             int mapWidth = map.width;
             int mapHeight = map.length;
             int startingPosX = (graphics.PreferredBackBufferWidth / textureWidth / 2) * textureWidth - (textureWidth / 2);

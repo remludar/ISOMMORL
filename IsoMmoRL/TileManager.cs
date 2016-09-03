@@ -17,7 +17,7 @@ namespace IsoMmoRL
 
         public static void Init(Texture2D tileSheet)
         {
-            tileSizeWidth = 64;
+            tileSizeWidth = 128;
             tileSizeHeight = 128;
             width = tileSheet.Width / tileSizeWidth;
             height = tileSheet.Height / tileSizeHeight;
@@ -36,15 +36,39 @@ namespace IsoMmoRL
 
         public static TextureRegion2D GetTile(int tileNum)
         {
-            if (tileNum == 0)
+            switch (tileNum)
             {
-                return tiles[new Vector2(5, 0)];
+                case 0:
+                    return tiles[new Vector2(1, 0)];
+                case 1:
+                    return tiles[new Vector2(2, 0)];
+                case 2:
+                    return tiles[new Vector2(1, 1)];
+                case 3:
+                    return tiles[new Vector2(2, 1)];
+                case 4:
+                    return tiles[new Vector2(4, 0)];
+                case 5:
+                    return tiles[new Vector2(5, 0)];
+                case 6:
+                    return tiles[new Vector2(6, 0)];                
+                case 7:
+                    return tiles[new Vector2(7, 0)];
+                case 8:
+                    return tiles[new Vector2(0, 1)];
+                case 9:
+                    return tiles[new Vector2(3, 1)];
+                case 10:
+                    return tiles[new Vector2(6, 1)];
+                case 11:
+                    return tiles[new Vector2(4, 1)];
+                case 12:
+                    return tiles[new Vector2(7, 1)];
+                case 13:
+                    return tiles[new Vector2(5, 1)];
+                default:
+                    return tiles[new Vector2(0, 0)];
             }
-            if(tileNum == 1)
-            {
-                return tiles[new Vector2(0, 0)];
-            }
-            return tiles[new Vector2(6, 0)];
         }
     }
 }

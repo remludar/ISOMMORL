@@ -25,7 +25,12 @@
 /processorParam:TextureFormat=Color
 /build:Images/basic_ground_tiles.png
 
-#begin Images/house_tiles.png
+#begin Map.txt
+/importer:
+/processor:
+/build:Map.txt
+
+#begin Images/character_48x48.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,10 +40,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/house_tiles.png
+/build:Images/character_48x48.png
 
-#begin Map.txt
-/importer:
-/processor:
-/build:Map.txt
+#begin Images/Character.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Character.png
 

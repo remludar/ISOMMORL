@@ -15,9 +15,10 @@ namespace IsoMmoRL
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Texture2D tileSheet;
         private Camera camera;
-        private Map map;
+        private Terrain terrain;
+        private Player player;
+        //private Map map;
 
         public GameManager()
         {
@@ -45,9 +46,6 @@ namespace IsoMmoRL
             camera.ViewportWidth = graphics.GraphicsDevice.Viewport.Width;
             camera.ViewportHeight = graphics.GraphicsDevice.Viewport.Height;
 
-            map = new Map(@"C:\Users\jewton\Dropbox\Personal\GameDev\MonoGame\Projects\Isometric MMO with Roguelike Quests\IsoMmoRL\IsoMmoRL\Map.txt");
-                          
-
             base.Initialize();
         }
 
@@ -58,8 +56,9 @@ namespace IsoMmoRL
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            tileSheet = Content.Load<Texture2D>("Images/basic_ground_tiles");
-            TileManager.Init(tileSheet);
+            
+            terrain = new Terrain(graphics, Content.Load<Texture2D>("Images/basic_ground_tiles"));
+            player = new Player(graphics, Content.Load<Texture2D>("Images/character"));
         }
 
         /// <summary>
@@ -80,6 +79,7 @@ namespace IsoMmoRL
         {
             _processInput();
             camera.Update();
+            player.Update();
 
 
             base.Update(gameTime);
@@ -96,31 +96,8 @@ namespace IsoMmoRL
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.TranslationMatrix);
 
-            int textureWidth = 128;
-            int textureHeight = 128;
-            int mapWidth = map.width;
-            int mapHeight = map.length;
-            int startingPosX = (graphics.PreferredBackBufferWidth / textureWidth / 2) * textureWidth - (textureWidth / 2);
-            int startingPosY = (graphics.PreferredBackBufferHeight / textureHeight / 2) * textureHeight - (mapHeight * textureWidth / 4) - (textureHeight / 2);
-
-
-            //Draw a basic flat grass level
-            for (int x = 0; x < mapWidth; x++)
-            {
-                for (int y = 0; y < mapHeight; y++)
-                {
-                    var texture = TileManager.GetTile(map.map[x,y]);
-                    var sourceRectangle = texture.Bounds;
-                    int posX = x * (textureWidth / 2) - y * (textureHeight / 2);
-                    int posY = y * (textureHeight / 4) + x * (textureWidth / 4);
-                    //int posX = x * (textureWidth / 2) + y * (textureHeight / 2);
-                    //int posY = y * (textureHeight / 4) - x * (textureWidth / 4);
-                    spriteBatch.Draw(texture.Texture, new Rectangle(startingPosX + posX, startingPosY + posY, TileManager.tileSizeWidth, TileManager.tileSizeHeight), sourceRectangle, Color.White);
-                }
-            }
-
-
-
+            terrain.Draw(spriteBatch);
+            player.Draw(spriteBatch);
 
             spriteBatch.End();
 

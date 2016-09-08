@@ -17,6 +17,8 @@ namespace IsoMmoRL
 
         private int _CurrentFrame;
         private int _TotalFrames;
+        private int counter;
+        private bool forward;
 
         public AnimatedSprite(Texture2D texture, int columns, int rows)
         {
@@ -25,20 +27,59 @@ namespace IsoMmoRL
             Columns = columns;
             _CurrentFrame = 0;
             _TotalFrames = rows * columns;
+            counter = 0;
+            forward = true;
         }
 
         public void Update()
         {
-            _CurrentFrame++;
-            if (_CurrentFrame == _TotalFrames)
-            {
-                _CurrentFrame = 0;
-            }
+
         }
 
-        public void Turn(int frame)
+        public void Idle(int a, int b, int c)
         {
-            _CurrentFrame = frame;
+            if (counter == 10)
+            {
+                if (_CurrentFrame < _TotalFrames)
+                {
+                    _CurrentFrame++;
+
+                }
+                else
+                    _CurrentFrame = 0;
+                counter = 0;
+            }
+            else counter++;
+        }
+
+        public void Walk(int direction)
+        {
+            _CurrentFrame = direction;
+        }
+
+        public void Walk(int a, int b, int c)
+        {
+            if (_CurrentFrame < a || _CurrentFrame > c)
+                _CurrentFrame = b;
+            if (counter == 10)
+            {
+                if (forward)
+                {
+                    _CurrentFrame++;
+                    if (_CurrentFrame == c)
+                        forward = false;
+                }
+                else
+                {
+                    _CurrentFrame--;
+                    if (_CurrentFrame == a)
+                        forward = true;
+                }
+                counter = 0;
+
+            }
+            else
+                counter++;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
@@ -55,3 +96,4 @@ namespace IsoMmoRL
         }
     }
 }
+    

@@ -13,24 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Images/basic_ground_tiles.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/basic_ground_tiles.png
-
 #begin Map.txt
 /importer:
 /processor:
 /build:Map.txt
 
-#begin Images/character_48x48.png
+#begin images/isoPrototypeTiles.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -40,9 +28,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/character_48x48.png
+/build:images/isoPrototypeTiles.png
 
-#begin Images/Character.png
+#begin Images/PlayerSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -52,5 +40,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/Character.png
+/build:Images/PlayerSheet.png
 

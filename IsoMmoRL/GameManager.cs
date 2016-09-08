@@ -56,9 +56,9 @@ namespace IsoMmoRL
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            terrain = new Terrain(graphics, Content.Load<Texture2D>("Images/basic_ground_tiles"));
-            player = new Player(graphics, Content.Load<Texture2D>("Images/character"));
+
+            terrain = new Terrain(graphics, Content.Load<Texture2D>("Images/isoPrototypeTiles"));
+            player = new Player(graphics, Content.Load<Texture2D>("Images/PlayerSheet"));
         }
 
         /// <summary>

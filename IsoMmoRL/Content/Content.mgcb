@@ -13,11 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Map.txt
-/importer:
-/processor:
-/build:Map.txt
-
 #begin images/isoPrototypeTiles.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -41,4 +36,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/PlayerSheet.png
+
+#begin MyFont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:MyFont
 

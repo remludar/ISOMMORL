@@ -18,6 +18,7 @@ namespace IsoMmoRL
         private Camera camera;
         private Terrain terrain;
         private Player player;
+        public static SpriteFont myFont { get; set; }
         //private Map map;
 
         public GameManager()
@@ -42,6 +43,8 @@ namespace IsoMmoRL
             var height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2 - graphics.PreferredBackBufferHeight / 2;
             this.Window.Position = new Point(width, height);
 
+            player = new Player();
+
             camera = new Camera();
             camera.ViewportWidth = graphics.GraphicsDevice.Viewport.Width;
             camera.ViewportHeight = graphics.GraphicsDevice.Viewport.Height;
@@ -58,7 +61,8 @@ namespace IsoMmoRL
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             terrain = new Terrain(graphics, Content.Load<Texture2D>("Images/isoPrototypeTiles"));
-            player = new Player(graphics, Content.Load<Texture2D>("Images/PlayerSheet"));
+            player.Init(graphics, Content.Load<Texture2D>("Images/PlayerSheet"));
+            myFont = Content.Load<SpriteFont>("MyFont");
         }
 
         /// <summary>
@@ -78,8 +82,8 @@ namespace IsoMmoRL
         protected override void Update(GameTime gameTime)
         {
             _processInput();
-            camera.Update();
             player.Update();
+            camera.Update();
 
 
             base.Update(gameTime);
@@ -97,7 +101,8 @@ namespace IsoMmoRL
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.TranslationMatrix);
 
             terrain.Draw(spriteBatch);
-            player.Draw(spriteBatch);
+
+            spriteBatch.DrawString(myFont, Player.GetPosition().ToString(), new Vector2(Player.GetPosition().X, Player.GetPosition().Y + 100), Color.White, 0.0f, new Vector2(100, 100), 1.0f, SpriteEffects.None, 0);
 
             spriteBatch.End();
 

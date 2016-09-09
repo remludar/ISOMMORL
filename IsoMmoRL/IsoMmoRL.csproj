@@ -57,8 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Map.txt" />
+    <Content Include="Map_lvl01.txt" />
     <Content Include="Icon.ico" />
+    <Content Include="Map_lvl03.txt" />
+    <Content Include="Map_lvl02.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Content.mgcb">

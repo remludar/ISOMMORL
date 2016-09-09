@@ -11,11 +11,11 @@ namespace IsoMmoRL
 {
     public class TextureRegion2D
     {
-        public TextureRegion2D(string name, Texture2D texture, int x, int y, int width, int height)
+        public TextureRegion2D(int level, Texture2D texture, int x, int y, int width, int height)
         {
             if (texture == null) throw new ArgumentNullException("texture");
 
-            Name = name;
+            Level = level;
             Texture = texture;
             X = x;
             Y = y;
@@ -23,7 +23,7 @@ namespace IsoMmoRL
             Height = height;
         }
 
-        public string Name { get; private set; }
+        public int Level { get; private set; }
         public Texture2D Texture { get; protected set; }
         public int X { get; private set; }
         public int Y { get; private set; }
